@@ -5,10 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/apernet/hysteria/core/pktconns/faketcp"
 	"github.com/apernet/hysteria/core/pktconns/obfs"
 	"github.com/apernet/hysteria/core/pktconns/udp"
-	"github.com/apernet/hysteria/core/pktconns/wechat"
 )
 
 type (
@@ -54,6 +52,7 @@ func NewClientUDPConnFunc(obfsPassword string, hopInterval time.Duration) Client
 	}
 }
 
+/*
 func NewClientWeChatConnFunc(obfsPassword string, hopInterval time.Duration) ClientPacketConnFunc {
 	if obfsPassword == "" {
 		return func(server string) (net.PacketConn, net.Addr, error) {
@@ -108,6 +107,7 @@ func NewClientFakeTCPConnFunc(obfsPassword string, hopInterval time.Duration) Cl
 		}
 	}
 }
+*/
 
 func NewServerUDPConnFunc(obfsPassword string) ServerPacketConnFunc {
 	if obfsPassword == "" {
@@ -134,6 +134,7 @@ func NewServerUDPConnFunc(obfsPassword string) ServerPacketConnFunc {
 	}
 }
 
+/*
 func NewServerWeChatConnFunc(obfsPassword string) ServerPacketConnFunc {
 	if obfsPassword == "" {
 		return func(listen string) (net.PacketConn, error) {
@@ -179,6 +180,7 @@ func NewServerFakeTCPConnFunc(obfsPassword string) ServerPacketConnFunc {
 		}
 	}
 }
+*/
 
 func isMultiPortAddr(addr string) bool {
 	_, portStr, err := net.SplitHostPort(addr)

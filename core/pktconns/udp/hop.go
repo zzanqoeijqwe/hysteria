@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/apernet/hysteria/core/pktconns/obfs"
+	"github.com/lucas-clemente/quic-go"
 )
 
 const (
@@ -24,7 +24,7 @@ type ObfsUDPHopClientPacketConn struct {
 	serverAddrs []net.Addr
 	hopInterval time.Duration
 
-	obfs obfs.Obfuscator
+	quic.Obfuscator
 
 	connMutex   sync.RWMutex
 	prevConn    net.PacketConn
@@ -57,7 +57,7 @@ type udpPacket struct {
 	addr net.Addr
 }
 
-func NewObfsUDPHopClientPacketConn(server string, hopInterval time.Duration, obfs obfs.Obfuscator) (*ObfsUDPHopClientPacketConn, net.Addr, error) {
+func NewObfsUDPHopClientPacketConn(server string, hopInterval time.Duration, obfs quic.Obfuscator) (*ObfsUDPHopClientPacketConn, net.Addr, error) {
 	host, ports, err := parseAddr(server)
 	if err != nil {
 		return nil, nil, err
@@ -79,7 +79,7 @@ func NewObfsUDPHopClientPacketConn(server string, hopInterval time.Duration, obf
 		serverAddr:  &hopAddr,
 		serverAddrs: serverAddrs,
 		hopInterval: hopInterval,
-		obfs:        obfs,
+		Obfuscator:  obfs,
 		addrIndex:   rand.Intn(len(serverAddrs)),
 		recvQueue:   make(chan *udpPacket, packetQueueSize),
 		closeChan:   make(chan struct{}),
@@ -155,11 +155,7 @@ func (c *ObfsUDPHopClientPacketConn) hop() {
 		_ = c.prevConn.Close() // recvRoutine will exit on error
 	}
 	c.prevConn = c.currentConn
-	if c.obfs != nil {
-		c.currentConn = NewObfsUDPConn(newConn, c.obfs)
-	} else {
-		c.currentConn = newConn
-	}
+	c.currentConn = newConn
 	// Set buffer sizes if previously set
 	if c.readBufferSize > 0 {
 		_ = trySetPacketConnReadBuffer(c.currentConn, c.readBufferSize)

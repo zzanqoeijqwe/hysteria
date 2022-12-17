@@ -31,11 +31,11 @@ import (
 )
 
 var clientPacketConnFuncFactoryMap = map[string]pktconns.ClientPacketConnFuncFactory{
-	"":             pktconns.NewClientUDPConnFunc,
-	"udp":          pktconns.NewClientUDPConnFunc,
-	"wechat":       pktconns.NewClientWeChatConnFunc,
-	"wechat-video": pktconns.NewClientWeChatConnFunc,
-	"faketcp":      pktconns.NewClientFakeTCPConnFunc,
+	"":    pktconns.NewClientUDPConnFunc,
+	"udp": pktconns.NewClientUDPConnFunc,
+	// "wechat":       pktconns.NewClientWeChatConnFunc,
+	// "wechat-video": pktconns.NewClientWeChatConnFunc,
+	// "faketcp":      pktconns.NewClientFakeTCPConnFunc,
 }
 
 func client(config *clientConfig) {

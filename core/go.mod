@@ -43,4 +43,4 @@ require (
 	google.golang.org/protobuf v1.28.1 // indirect
 )
 
-replace github.com/lucas-clemente/quic-go => github.com/apernet/quic-go v0.31.1-0.20221208013043-a01b50646f2c
+replace github.com/lucas-clemente/quic-go => github.com/apernet/quic-go v0.31.1-0.20221217071728-fd43ba23387b
