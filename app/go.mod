@@ -1,4 +1,4 @@
-module github.com/apernet/hysteria/app
+module app
 
 go 1.21
 

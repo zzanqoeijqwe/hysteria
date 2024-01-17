@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/cobra"
 	"go.uber.org/zap"
 
-	"github.com/apernet/hysteria/app/internal/utils"
+	"app/internal/utils"
 	"github.com/apernet/hysteria/core/client"
 )
 

@@ -20,7 +20,7 @@ import (
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
 
-	"github.com/apernet/hysteria/app/internal/utils"
+	"app/internal/utils"
 	"github.com/apernet/hysteria/core/server"
 	"github.com/apernet/hysteria/extras/auth"
 	"github.com/apernet/hysteria/extras/correctnet"
